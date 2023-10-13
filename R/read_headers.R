@@ -67,8 +67,7 @@ isCompressed <- function(header) {
 }
 
 isDefinition <- function(header) {
-  rawToBits(header)[7] |>
-    as.logical()
+  as.logical(rawToBits(header)[7])
 }
 
 hasDeveloperData <- function(object) {
@@ -81,8 +80,7 @@ hasDeveloperData <- function(object) {
     header <- object
   }
   
-  rawToBits(header)[6] |>
-    as.logical()
+  as.logical(rawToBits(header)[6])
 }
 
 timeOffset <- function(header) {
@@ -100,11 +98,9 @@ localMessageNumber_header <- function(object) {
     header <- object
 
     if(isCompressed(header)) {
-        rawToBits(header)[6:7] |>
-            .binaryToInt()
+        .binaryToInt(rawToBits(header)[6:7])
     } else {
-        rawToBits(header)[1:4] |>
-            .binaryToInt()
+        .binaryToInt(rawToBits(header)[1:4])
     }
 }
 
@@ -119,10 +115,8 @@ localMessageNumber <- function(object) {
     }
     
     if(isCompressed(header)) {
-        rawToBits(header)[6:7] |>
-            .binaryToInt()
+        .binaryToInt(rawToBits(header)[6:7])
     } else {
-        rawToBits(header)[1:4] |>
-            .binaryToInt()
+        .binaryToInt(rawToBits(header)[1:4])
     }
 }
