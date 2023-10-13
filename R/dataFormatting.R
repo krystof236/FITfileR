@@ -238,13 +238,13 @@
   field_names <- vapply(dev_msg_defs, .getValueForFieldNum, 3L, FUN.VALUE = character(1))
   units <- vapply(dev_msg_defs, .getValueForFieldNum, 8L, FUN.VALUE = character(1))
     
-  message_table <- lapply(x, 
+  message_table <- bind_rows(lapply(x, 
                           FUN = function(y) {
                             tmp <- y@dev_fields
                             names(tmp) <- field_names
                             return(tmp)
                           } 
-  ) |> bind_rows()
+  ))
 
   for(i in ncol(message_table)) {
     attributes(message_table[[i]]) <- list(units = units[i])
